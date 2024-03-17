@@ -18,6 +18,20 @@ MAIN Color: #4dabf7
 Text and grey Color: #343a40
 */
 
+/* CSS VARIABLES for Hamburger menu. */
+:root {
+  --bar-width: 60px;
+  --bar-height: 8px;
+  --hamburger-gap: 6px;
+  --foreground: #4dabf7;
+  --background: #fff;
+  /* --hamburger-margin: 5px; */
+  --animation-timing: 200ms ease-in-out;
+  --hamburger-height: calc(
+    var(--bar-height) * 3 + var(--hamburger-gap) * 2
+  ); /* To determine the length of the diagonal's width. */
+}
+
 body {
   font-family: "Inter", sans-serif;
   color: #343a40;
@@ -30,6 +44,10 @@ body {
   margin: 0 auto;
 }
 
+.hamburger-menu {
+  display: none;
+}
+
 .btn:link,
 .btn:visited {
   /* color: #fff;
@@ -39,6 +57,10 @@ body {
   font-weight: 500;
   text-decoration: none;
   display: inline-block;
+}
+
+.hide {
+  display: none;
 }
 
 /*-------------------------------*/
@@ -408,26 +430,119 @@ footer p {
 /* Mobile: */
 @media (max-width: 767px) {
   /* Hamburger Menu should: */
+
   .container {
-    width: 90%;
+    /* width: 75%; */
+    width: 80%;
   }
-  nav {
-    /*     display: flex;*/
-    display: none;
+
+  .hamburger-menu {
+    /* Width of the hamburger bar when are on the X shape. */
+    --x-width: calc(var(--hamburger-height) * 1.41421356237);
+    display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+    gap: var(--hamburger-gap);
+    max-width: max-content;
+    position: absolute;
+    /* To show up over the sidebar. */
+    z-index: 2;
+    cursor: pointer;
+    /* top: var(--hamburger-margin);
+    left: var(--hamburger-margin); */
+    top: 0.3rem;
+    left: 0.3rem;
+  }
+
+  .hamburger-menu::before,
+  .hamburger-menu input,
+  .hamburger-menu::after {
+    /* top: 0;
+    left: 0; */
+    content: "";
+    width: var(--bar-width);
+    height: var(--bar-height);
+    background-color: var(--foreground);
+    border-radius: 9999px;
+    transition: opacity var(--animation-timing), width var(--animation-timing),
+      rotate var(--animation-timing), translate var(--animation-timing),
+      background-color var(--animation-timing);
+
+    transform-origin: left center;
+  }
+
+  .hamburger-menu input {
+    /* Remove the default appearance. */
+    appearance: none;
+    outline: none;
+    pointer-events: none;
+  }
+
+  .hamburger-menu input:checked {
+    opacity: 0;
+    width: 0;
+  }
+
+  .hamburger-menu:has(input:checked)::before {
+    rotate: 45deg;
+    width: var(--x-width);
+    translate: 0 calc(var(--bar-height) / -2);
+  }
+
+  .hamburger-menu:has(input:checked)::after {
+    rotate: -45deg;
+    width: var(--x-width);
+    translate: 0 calc(var(--bar-height) / 2);
+  }
+
+  nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* Hide the sidebar. */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    /* align-items: center; */
     /* background-color: #4dabf7; */
+
     padding: 15px;
     border-radius: 10px;
-    /* max-height: 100px; */
+    transition: translate var(--animation-timing);
+    translate: -130%;
+    /* margin-top: calc(var(--hamburger-height) + var(--hamburger-margin) + 1rem); */
+    padding: 0.5rem 1rem;
+    padding-top: calc(var(--hamburger-height) + var(--hamburger-margin) + 1rem);
+    background-color: var(--foreground);
+    color: var(--background);
+    /* max-width: 10rem; */
+    min-height: 100vh;
+  }
+
+  ul {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    /* align-items: flex-start; */
+  }
+
+  .hamburger-menu:has(input:checked) + nav {
+    translate: 0;
+    background-color: rgba(165, 216, 255, 0.9);
+    color: #343a40;
+  }
+  .hamburger-menu:has(input:checked) + nav ul .a-nav {
+    /* opacity: 1; */
+    color: #343a40;
+  }
+
+  /* On ckecking input that is inside the label's class 'hamburger-menu' we swap colors: */
+  .hamburger-menu:has(input:checked) {
+    --foreground: #fff;
+    --background: #333;
   }
 
   .my-header {
-    /* background-color: #d0ebff; */
     flex-direction: column;
-    /* justify-content: center; */
-    /* align-items: center; */
   }
 
   .my-header {
@@ -475,12 +590,27 @@ footer p {
     row-gap: 20px;
     grid-template-columns: 1fr;
   }
+
+  figure {
+    width: 100%;
+  }
+
   .discover-sign-up {
     padding: 25px;
     align-items: center;
   }
   .discover-sign-up:nth-child(2) {
     text-align: center;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 1fr);
+    /* column-gap: 10px; */
+    gap: 50px;
+    margin-left: 4rem;
+  }
+  .faq h4 {
+    margin-left: 1rem;
   }
 }
 
