@@ -127,6 +127,7 @@ a {
 .my-header {
   display: flex;
   justify-content: space-between;
+  /* margin-top: 64px; */
 }
 
 .my-header section {
@@ -201,13 +202,14 @@ a {
   stroke: #343a40;
   width: 40px;
   height: 40px;
-  margin-bottom: 15px;
+  margin-bottom: 24px;
   background-color: #74c0fc;
   border-radius: 20px;
   padding: 5px;
 }
+
 .grid-box-title {
-  margin-bottom: 15px;
+  margin-bottom: 1rem;
 }
 
 /* ----------------------- */
@@ -217,9 +219,18 @@ a {
 .testimony-container {
   padding: 15px;
   background-color: #4dabf7;
-  color: #343a40;
+  /* color: #343a40; */
+  color: #fff;
   border-radius: 20px;
   margin-bottom: 100px;
+}
+
+.testimony-text {
+  color: #e7f5ff;
+}
+
+.testimony-author {
+  color: #d0ebff;
 }
 
 .grid-2-col {
@@ -269,6 +280,7 @@ figure {
 .figure-ul {
   display: flex;
   flex-direction: column;
+  margin-bottom: 48px;
   /* width: 90%; */
 }
 
@@ -277,11 +289,8 @@ figure {
   margin: 20px 0 35px 20px;
 }
 
-.figure-list-item {
-  /* font-size: 18px; */
-  /* background-color: #74c0fc; */
-  margin: 0 0 5px 5px;
-  align-self: center;
+.card-text {
+  padding: 24px;
 }
 
 .card-image {
@@ -296,6 +305,26 @@ figure {
 
 .icon--list-item {
   display: flex;
+  margin-bottom: 0.8rem;
+  align-items: center;
+}
+
+.figure-list-item {
+  /* font-size: 18px; */
+  /* background-color: #74c0fc; */
+  margin: 0 0 5px 1rem;
+  /* align-self: center; */
+  /* text-align: center; */
+}
+
+.my-icon-card {
+  stroke: #343a40;
+  width: 40px;
+  height: 40px;
+  /* margin-bottom: 24px; */
+  background-color: #74c0fc;
+  border-radius: 20px;
+  padding: 5px;
 }
 
 .card-icon {
@@ -303,6 +332,8 @@ figure {
   background-color: #fff;
   /* background-color: #adb5bd; */
   stroke: #4dabf7;
+  /* align-self: flex-end; */
+  /* align-items: center; */
 }
 
 .add-to-cart-group {
@@ -400,7 +431,9 @@ footer {
 }
 .footer-grid div {
   margin-top: 15px;
-  margin-left: 20px;
+  /* margin-left: 20px; */
+  margin-left: 0.5rem;
+  margin-right: 2rem;
 }
 
 .flex-ul li a:link,
@@ -424,6 +457,10 @@ footer p {
   font-size: 14px;
   padding-bottom: 10px;
   text-align: center;
+}
+
+.map {
+  border-radius: 0.8rem;
 }
 
 /* MEDIA Queries.0 */
@@ -506,7 +543,11 @@ footer p {
     /* background-color: #4dabf7; */
 
     padding: 15px;
-    border-radius: 10px;
+    /* border-radius: 10px; */
+    border-top-left-radius: 0;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     transition: translate var(--animation-timing);
     translate: -130%;
     /* margin-top: calc(var(--hamburger-height) + var(--hamburger-margin) + 1rem); */
@@ -595,6 +636,13 @@ footer p {
     width: 100%;
   }
 
+  .icon--list-item {
+    margin-bottom: -0.5rem;
+  }
+  .icon--list-item:last-child {
+    margin-bottom: 1rem;
+  }
+
   .discover-sign-up {
     padding: 25px;
     align-items: center;
@@ -607,15 +655,134 @@ footer p {
     grid-template-rows: repeat(4, 1fr);
     /* column-gap: 10px; */
     gap: 50px;
-    margin-left: 4rem;
+    /* margin-left: 4rem; */
+    margin: 4rem;
   }
   .faq h4 {
     margin-left: 1rem;
   }
 }
 
+/* Set the size of the div element that contains the map */
+#map {
+  border-radius: 0.8rem;
+  margin-right: 1rem;
+  height: 250px; /* The height is 400 pixels */
+  /* width: 100%;  */ /* The width is the width of the web page */
+  width: 100%;
+}
+
 /* Small Screen. */
 @media (min-width: 768px) and (max-width: 991px) {
+  .hamburger-menu {
+    /* Width of the hamburger bar when are on the X shape. */
+    --x-width: calc(var(--hamburger-height) * 1.41421356237);
+    display: flex;
+    flex-direction: column;
+    gap: var(--hamburger-gap);
+    max-width: max-content;
+    position: absolute;
+    /* To show up over the sidebar. */
+    z-index: 2;
+    cursor: pointer;
+    /* top: var(--hamburger-margin);
+    left: var(--hamburger-margin); */
+    top: 0.3rem;
+    left: 0.3rem;
+  }
+
+  .hamburger-menu::before,
+  .hamburger-menu input,
+  .hamburger-menu::after {
+    /* top: 0;
+    left: 0; */
+    content: "";
+    width: var(--bar-width);
+    height: var(--bar-height);
+    background-color: var(--foreground);
+    border-radius: 9999px;
+    transition: opacity var(--animation-timing), width var(--animation-timing),
+      rotate var(--animation-timing), translate var(--animation-timing),
+      background-color var(--animation-timing);
+
+    transform-origin: left center;
+  }
+
+  .hamburger-menu input {
+    /* Remove the default appearance. */
+    appearance: none;
+    outline: none;
+    pointer-events: none;
+  }
+
+  .hamburger-menu input:checked {
+    opacity: 0;
+    width: 0;
+  }
+
+  .hamburger-menu:has(input:checked)::before {
+    rotate: 45deg;
+    width: var(--x-width);
+    translate: 0 calc(var(--bar-height) / -2);
+  }
+
+  .hamburger-menu:has(input:checked)::after {
+    rotate: -45deg;
+    width: var(--x-width);
+    translate: 0 calc(var(--bar-height) / 2);
+  }
+
+  nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* Hide the sidebar. */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    /* align-items: center; */
+    /* background-color: #4dabf7; */
+
+    padding: 15px;
+    /* border-radius: 10px; */
+    border-top-left-radius: 0;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    transition: translate var(--animation-timing);
+    translate: -130%;
+    /* margin-top: calc(var(--hamburger-height) + var(--hamburger-margin) + 1rem); */
+    padding: 0.5rem 1rem;
+    padding-top: calc(var(--hamburger-height) + var(--hamburger-margin) + 1rem);
+    background-color: var(--foreground);
+    color: var(--background);
+    /* max-width: 10rem; */
+    min-height: 100vh;
+  }
+
+  ul {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    /* align-items: flex-start; */
+  }
+
+  .hamburger-menu:has(input:checked) + nav {
+    translate: 0;
+    background-color: rgba(165, 216, 255, 0.9);
+    color: #343a40;
+  }
+  .hamburger-menu:has(input:checked) + nav ul .a-nav {
+    /* opacity: 1; */
+    color: #343a40;
+  }
+
+  /* On ckecking input that is inside the label's class 'hamburger-menu' we swap colors: */
+  .hamburger-menu:has(input:checked) {
+    --foreground: #fff;
+    --background: #333;
+  }
+
   .my-header {
     /* background-color: #a5aaae; */
     flex-direction: column;
@@ -668,5 +835,9 @@ footer p {
     width: 75%;
     /* border-top-left-radius: 10px;
     border-bottom-left-radius: 10px; */
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
   }
 }
