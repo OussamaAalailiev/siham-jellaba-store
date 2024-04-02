@@ -319,7 +319,7 @@ figure {
 
 .icon--list-item {
   display: flex;
-  margin-bottom: 0.8rem;
+  margin-bottom: -0.5rem;
   align-items: center;
 }
 
@@ -691,14 +691,8 @@ footer p {
   }
 
   .icon--list-item {
-    margin-bottom: -0.5rem;
-  }
-  .icon--list-item:last-child {
-    margin-bottom: 1rem;
-  }
-
-  .icon--list-item {
-    margin-bottom: -0.5rem;
+    /* margin-bottom: -1.2rem; */
+    margin-bottom: -1.5rem;
   }
   .icon--list-item:last-child {
     margin-bottom: 1rem;
@@ -1007,6 +1001,10 @@ footer p {
     width: 75%;
     /* border-top-left-radius: 10px;
     border-bottom-left-radius: 10px; */
+  }
+
+  .icon--list-item {
+    margin-bottom: -1.5rem;
   }
 
   .footer-grid {
